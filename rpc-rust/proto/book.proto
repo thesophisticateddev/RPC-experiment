@@ -1,0 +1,23 @@
+syntax = "proto3";
+package book;
+
+message BookItem {
+  string title = 1;
+  string author = 2;
+  int32 price = 3;
+}
+
+message BookRequest { string title = 1; }
+
+message AddBookRequest {
+  string title = 1;
+  string author = 2;
+  int32 price = 3;
+}
+
+message BookResponse { repeated BookItem books = 1; }
+
+service Book {
+  rpc GetBook(BookRequest) returns (BookResponse);
+  rpc AddBook(AddBookRequest) returns (BookResponse);
+}
