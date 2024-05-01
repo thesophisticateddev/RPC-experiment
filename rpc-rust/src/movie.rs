@@ -2,7 +2,7 @@ pub mod grpc_movie {
     tonic::include_proto!("movie");
 }
 
-use tonic::{transport::Server, Request, Response, Status};
+use tonic::{Request, Response, Status};
 
 use grpc_movie::movie_server::{Movie, MovieServer};
 use grpc_movie::{MovieRequest, MovieResponse};
@@ -61,5 +61,9 @@ impl Movie for MovieService {
 }
 
 pub fn get_movie_server() -> CorsGrpcWeb<MovieServer<MovieService>> {
-    tonic_web::enable(MovieServer::new(MovieService::default()))
+    //NOTE - we can add service interceptors here
+
+    let movie_service = MovieService::default();
+    let movie_server = MovieServer::new(movie_service);
+    tonic_web::enable(movie_server)
 }

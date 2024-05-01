@@ -44,10 +44,9 @@ impl Book for BookService {
     ) -> Result<Response<BookResponse>, Status> {
         println!("Got a request: {:?}", request);
 
-        let request_data = request.into_inner();
+        // let request_data = request.into_inner();
 
         let reply = grpc_book::BookResponse { books: vec![] };
-        let status = Status::ok("Book added successfully");
         Ok(Response::new(reply))
     }
 }
