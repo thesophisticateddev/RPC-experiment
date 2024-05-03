@@ -22,4 +22,5 @@ npm run start
 
 ```bash
 cd rpc-rust
+cargo run
 ```
